@@ -32,9 +32,8 @@ function currentRoliiY() {
 
 /* -- Define the PhysicsJS world, rolii bodies and handle transform events. -- */
 Physics(function (world) {
-
 	// window dimensions
-    var viewWidth = window.innerWidth;
+    var viewWidth = window.innerWidth - 30;
     var viewHeight = window.innerHeight;
     var center = Physics.vector(viewWidth, viewHeight).mult(0.5); // center
 	

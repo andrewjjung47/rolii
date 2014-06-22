@@ -185,7 +185,7 @@ DrawingBoard.Board.prototype = {
   initUserData: function(userName, userObj) {
     this.userData[userName] = {
       isDrawing: true,
-      isMouseHovering: false,
+      isMouseHovering: true,
       coords: {
         current: { x: currentRoliiX(), y: currentRoliiY() },
         old: { x: currentRoliiX(), y: currentRoliiY() },
@@ -757,7 +757,7 @@ DrawingBoard.Board.prototype = {
         if (err) {
           throw err;
         }
-        this.userData[this.goinstant.userKey.name].isDrawing = false;
+        this.userData[this.goinstant.userKey.name].isDrawing = true;
         this.goinstant.room.key(this.goinstant.userKey.name).key('data').set(this.userData[this.goinstant.userKey.name]);
       }.bind(this));
 		}, this));
@@ -782,7 +782,6 @@ DrawingBoard.Board.prototype = {
         if (window.requestAnimationFrame && currentUserData.isMouseHovering) {
           var cursorWidth = this.ctx.lineWidth > 1 ? this.ctx.lineWidth : 2;
           currentUserData.cursor.css({ width: cursorWidth + 'px', height: cursorWidth + 'px' });
-          console.log("x: "+currentRoliiX()+", y: "+currentRoliiY());
           var transform = DrawingBoard.Utils.tpl("translateX({{x}}px) translateY({{y}}px)", {
             x: currentUserData.coords.current.x-(cursorWidth/2),
             y: currentUserData.coords.current.y-(cursorWidth/2)
@@ -903,9 +902,9 @@ DrawingBoard.Board.prototype = {
     if (userObj.isDrawing && (!e.touches || e.touches.length === 0)) {
       channels.isDrawing.message({
         username: userName,
-        val: false
+        val: true
       }, function(err) {
-        userObj.isDrawing = false;
+        userObj.isDrawing = true;
         this.goinstant.room.key(this.goinstant.userKey.name).key('/data').set(this.userData[userName]);
         this.saveHistory();
         this.saveWebStorage();
@@ -951,7 +950,7 @@ DrawingBoard.Board.prototype = {
     var userObj = this.userData[userName];
 
     var newValues = {
-      isMouseHovering: false
+      isMouseHovering: ture
     };
 
     channels.isMouseHovering.message({
