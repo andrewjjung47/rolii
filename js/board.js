@@ -143,7 +143,7 @@ DrawingBoard.Board = function(id, opts) {
 DrawingBoard.Board.defaultOpts = {
 	controls: ['Color', 'DrawingMode', 'Size', 'Navigation'],
 	controlsPosition: "top left",
-	color: randomColor(), //"#000000",
+	color: "#FFF", //randomColor(),"#000000", // initialize the colour to white, not random or black
 	size: 1,
 	background: "#fff",
 	eraserColor: "background",
@@ -189,10 +189,10 @@ DrawingBoard.Board.prototype = {
       coords: {
         current: { x: currentRoliiX(), y: currentRoliiY() },
         old: { x: currentRoliiX(), y: currentRoliiY() },
-        oldMid: { x: currentRoliiX(), y: currentRoliiY() }//,
-        //fill: { x: 0, y: 0 }
+        oldMid: { x: currentRoliiX(), y: currentRoliiY() }
+        //,fill: { x: 0, y: 0 }
       },
-      lineWidth: 5, //this.ctx.lineWidth,
+      lineWidth: currentRoliiRadius,
       strokeStyle: this.ctx.strokeStyle,
     };
 
@@ -207,7 +207,7 @@ DrawingBoard.Board.prototype = {
 
 	reset: function(opts) {
 		opts = $.extend({
-			color: this.opts.color,//randomColor(),//"#0066FF",//this.opts.color,
+			color: currentRoliiColour,//randomColor(),//"#0066FF",//this.opts.color,
 			size: this.opts.size,
 			webStorage: true,
 			history: true,
@@ -966,24 +966,19 @@ DrawingBoard.Board.prototype = {
 	},
 
 	_getInputCoords: function(e) {
-            return {
-                x: currentRoliiX(),
-                y: currentRoliiY()
-            }
-            /*
 		e = e.originalEvent ? e.originalEvent : e;
 		var x, y;
 		if (e.touches && e.touches.length == 1) {
 			x = e.touches[0].pageX;
 			y = e.touches[0].pageY;
 		} else {
-			x = e.pageX;
-			y = e.pageY;
+			x = currentRoliiX();
+			y = currentRoliiY();
 		}
 		return {
 			x: x - this.dom.$canvas.offset().left,
 			y: y - this.dom.$canvas.offset().top
-		};*/
+		};
 	},
 
 	_getMidInputCoords: function(oldCoords, coords) {
