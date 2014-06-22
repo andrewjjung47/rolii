@@ -42,7 +42,7 @@ DrawingBoard.Board = function(id, opts) {
 		return false;
 
   var shortUserName = this.goinstant.userKey.name.substr("/.users/guest:".length);
-	var tpl = '<div class="drawing-board-canvas-wrapper"></canvas><canvas class="drawing-board-canvas" id="drawingBoardCanvas"></canvas></div>';
+	var tpl = '<div class="drawing-board-canvas-wrapper" id="drawingBoardCanvasWrapper"></canvas><canvas class="drawing-board-canvas" id="drawingBoardCanvas"></canvas></div>';
 	if (this.opts.controlsPosition.indexOf("bottom") > -1) tpl += '<div class="drawing-board-controls"></div>';
 	else tpl = '<div class="drawing-board-controls"></div>' + tpl;
         
@@ -68,6 +68,9 @@ DrawingBoard.Board = function(id, opts) {
 	this.ctx = this.canvas && this.canvas.getContext && this.canvas.getContext('2d') ? this.canvas.getContext('2d') : null;
 	this.color = this.opts.color;
 
+        //document.getElementById("drawingBoardCanvas").style.top=(window.innerHeight*(-1))+"px";
+        document.getElementById("drawingBoardCanvasWrapper").style.top=(window.innerHeight*(-1))+"px";
+        
   self.goinstant.room.users.get(function(err, usersObj, contextObj) {
     _.forEach(_.keys(usersObj), function(curUserKey) {
       var userKey = usersObj[curUserKey];

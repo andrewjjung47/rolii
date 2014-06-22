@@ -8902,7 +8902,7 @@ Physics.renderer('canvas', function( proto ){
                         ,follow: null
                         ,offset: null
                         ,scale: 1
-                        ,zIndex: 1
+                        ,zIndex: 100
                     })( opts )
                 }
                 ;

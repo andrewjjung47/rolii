@@ -6,7 +6,7 @@
 
 .drawing-board-canvas-wrapper { position: relative; margin: 0; border: 0px solid #ddd; }
 
-.drawing-board-canvas { position: absolute; top: -100px; left: 0; z-index: 10; width: auto; }
+.drawing-board-canvas { position: absolute; top: 0px; left: 0; z-index: 10; width: auto; }
 
 .drawing-board-canvas { cursor: crosshair; z-index: 20;}
 
